@@ -2,6 +2,13 @@
 
 React project from the [Ultimate React Course](https://github.com/jonasschmedtmann/ultimate-react-course) by Jonas Schmedtmann.
 
+## Learning:
+
+- React Router with `createBrowserRouter`:
+  - routes structures: `{ path: "/", element: <Home />, errorElement: <Error />, children: [...] }`
+  - use of "loader" function with `useLoaderData`.
+  - `useNavigation` hook.
+
 ## Planning:
 
 ### Requirements and features:
