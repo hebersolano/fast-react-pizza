@@ -5,7 +5,7 @@ React project from the [Ultimate React Course](https://github.com/jonasschmedtma
 ## Learning:
 
 - React Router with `createBrowserRouter`:
-  - routes structures: `{ path: "/", element: <Home />, errorElement: <Error />, children: [...] }`
+  - routes structures: ```js { path: "/", element: <Home />, errorElement: <Error />, children: [...] }```
   - use of "loader" function with `useLoaderData`.
   - `useNavigation` hook.
 
