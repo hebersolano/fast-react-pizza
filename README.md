@@ -8,6 +8,7 @@ React project from the [Ultimate React Course](https://github.com/jonasschmedtma
   - routes structures: ```js { path: "/", element: <Home />, errorElement: <Error />, children: [...] }```
   - use of "loader" function with `useLoaderData`.
   - `useNavigation` hook.
+  - "actions" functions and `useActionData` hook to read what the function returns
 
 ## Planning:
 
