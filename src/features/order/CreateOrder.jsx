@@ -41,7 +41,7 @@ function CreateOrder() {
 
   return (
     <div>
-      <h2>Ready to order? Let's go!</h2>
+      <h2>Ready to order? Let&apos;s go!</h2>
 
       <Form method="POST">
         <div>
@@ -60,7 +60,13 @@ function CreateOrder() {
         <div>
           <label>Address</label>
           <div>
-            <input type="text" name="address" required />
+            <input
+              className="w-full rounded-full border border-stone-200 px-4 py-2 text-sm transition-all
+                duration-300 focus:outline-none focus:ring focus:ring-yellow-400 md:px-6"
+              type="text"
+              name="address"
+              required
+            />
           </div>
         </div>
 
@@ -79,7 +85,10 @@ function CreateOrder() {
 
         <div>
           <button
-            className="f inline-block rounded-full bg-yellow-400 px-4 py-3 font-semibold uppercase tracking-wide text-stone-800 transition-colors hover:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed"
+            className="inline-block rounded-full bg-yellow-400 px-4 py-3 font-semibold uppercase
+              tracking-wide text-stone-800 transition-colors hover:bg-yellow-300
+              focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2
+              disabled:cursor-not-allowed"
             disabled={isSubmitting}
           >
             Order now
