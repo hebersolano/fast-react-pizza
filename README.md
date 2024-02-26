@@ -5,10 +5,13 @@ React project from the [Ultimate React Course](https://github.com/jonasschmedtma
 ## Learning:
 
 - React Router with `createBrowserRouter`:
-  - routes structures: ```js { path: "/", element: <Home />, errorElement: <Error />, children: [...] }```
+  - routes structures: `js { path: "/", element: <Home />, errorElement: <Error />, children: [...] }`
   - use of "loader" function with `useLoaderData`.
   - `useNavigation` hook.
   - "actions" functions and `useActionData` hook to read what the function returns
+- Tailwind CSS:
+  - installation and configuration: "prettier" + "prettier-plugin-tailwindcss", tailwind fold extension
+  - tailwind @layer components: reuse styles
 
 ## Planning:
 
