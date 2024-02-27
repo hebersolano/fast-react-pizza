@@ -18,6 +18,9 @@ export default {
       fontFamily: {
         pizza: "Roboto Mono, monospace",
       },
+      height: {
+        screen: "100dvh",
+      },
     },
   },
   plugins: [],
