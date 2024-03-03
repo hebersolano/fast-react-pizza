@@ -21,7 +21,7 @@ function Button({ handleClick, to, disable, type = "primary", children }) {
   if (to) {
     return (
       <Link className={tailwind[type]} to={to}>
-        Order pizzas
+        {children}
       </Link>
     );
   }
