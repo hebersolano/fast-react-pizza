@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { twMerge } from "tailwind-merge";
 
-function Button({ handleClick, to, disable, type = "primary", children }) {
+function Button({ onClick, to, disable, type = "primary", children }) {
   const tailwind = {
     base: "inline-block rounded-full text-sm bg-yellow-400 font-semibold uppercase tracking-wide text-stone-800 transition-colors hover:bg-yellow-300 focus:outline-none focus:ring focus:ring-yellow-300 focus:ring-offset-2 disabled:cursor-not-allowed sm:px-6 ",
     get primary() {
@@ -27,7 +27,7 @@ function Button({ handleClick, to, disable, type = "primary", children }) {
   }
 
   return (
-    <button className={tailwind[type]} disabled={disable} onClick={handleClick}>
+    <button className={tailwind[type]} disabled={disable} onClick={onClick}>
       {children}
     </button>
   );

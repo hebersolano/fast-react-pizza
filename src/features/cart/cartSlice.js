@@ -4,13 +4,16 @@ const fakeCart = [
   {
     pizzaId: 12,
     name: "Mediterranean",
+    quantity: 1,
     unitPrice: 16,
-    totalPrice: 32,
+    get totalPrice() {
+      return this.unitPrice * this.quantity;
+    },
   },
 ];
 
 const initialState = {
-  cart: [...fakeCart],
+  cart: [],
 };
 
 const cartSlice = createSlice({
@@ -53,3 +56,12 @@ export const {
 
 const cartReducer = cartSlice.reducer;
 export default cartReducer;
+
+// this could cause performance issues, check "reselect" library
+export function getTotalCartPizzas(state) {
+  return state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
+}
+
+export function getTotalCartPrice(state) {
+  return state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+}
