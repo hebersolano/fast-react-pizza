@@ -37,6 +37,10 @@ const cartSlice = createSlice({
     decreaseItemQuantity(state, action) {
       // payload = id
       const item = state.cart.find((item) => item.pizzaId === action.payload);
+      if (item.quantity == 0) {
+        cartSlice.caseReducers.deleteItem(state, action);
+        return;
+      }
       item.quantity--;
       item.totalPrice = item.quantity * item.unitPrice;
     },
@@ -57,6 +61,7 @@ export const {
 const cartReducer = cartSlice.reducer;
 export default cartReducer;
 
+// SELECTOR for useSelector hook
 // this could cause performance issues, check "reselect" library
 export function getTotalCartPizzas(state) {
   return state.cart.cart.reduce((sum, item) => sum + item.quantity, 0);
@@ -64,4 +69,9 @@ export function getTotalCartPizzas(state) {
 
 export function getTotalCartPrice(state) {
   return state.cart.cart.reduce((sum, item) => sum + item.totalPrice, 0);
+}
+
+export function getItemQuantityById(id) {
+  return (state) =>
+    state.cart.cart.find((item) => item.pizzaId == id)?.quantity ?? 0;
 }
