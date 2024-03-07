@@ -8,6 +8,9 @@ import {
 import { getOrder } from "../../services/apiRestaurant";
 import { useLoaderData } from "react-router";
 import OrderItem from "./OrderItem";
+import { useDispatch } from "react-redux";
+import { clearCart } from "../cart/cartSlice";
+import { useEffect } from "react";
 
 /* const order = {
   id: "ABCDEF",
@@ -45,7 +48,9 @@ import OrderItem from "./OrderItem";
 }; */
 
 function Order() {
+  const dispatch = useDispatch();
   const order = useLoaderData();
+
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
     id,
@@ -57,6 +62,13 @@ function Order() {
     cart,
   } = order;
   const deliveryIn = calcMinutesLeft(estimatedDelivery);
+
+  useEffect(
+    function () {
+      if (id) dispatch(clearCart());
+    },
+    [dispatch],
+  );
 
   return (
     <div className="space-y-8 px-4 py-6">
@@ -88,7 +100,7 @@ function Order() {
 
       <ul className="divide-y divide-stone-200 border-b border-t">
         {cart.map((item) => (
-          <OrderItem key={item.id} item={item} />
+          <OrderItem key={item.pizzaId} item={item} />
         ))}
       </ul>
 

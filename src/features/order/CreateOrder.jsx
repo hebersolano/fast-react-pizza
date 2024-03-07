@@ -1,7 +1,10 @@
 import { Form, redirect, useActionData, useNavigation } from "react-router-dom";
 import { createOrder } from "../../services/apiRestaurant";
 import Button from "../../ui/Button";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import EmptyCart from "../cart/EmptyCart";
+import { clearCart } from "../cart/cartSlice";
+import store from "../../store";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
@@ -9,7 +12,7 @@ const isValidPhone = (str) =>
     str,
   );
 
-const fakeCart = [
+/*const fakeCart = [
   {
     pizzaId: 12,
     name: "Mediterranean",
@@ -31,16 +34,25 @@ const fakeCart = [
     unitPrice: 15,
     totalPrice: 15,
   },
-];
+]; */
 
 function CreateOrder() {
   const navigation = useNavigation();
   const isSubmitting = navigation.state === "submitting";
   const formErrors = useActionData();
   const username = useSelector((state) => state.user.username);
+  const cart = useSelector((state) => state.cart.cart);
+  const dispatch = useDispatch();
 
   // const [withPriority, setWithPriority] = useState(false);
-  const cart = fakeCart;
+  // const cart = fakeCart;
+
+  function handleSubmit() {
+    console.log("test submit");
+    // dispatch(clearCart());
+  }
+
+  if (!cart.length) return <EmptyCart />;
 
   return (
     <div className="px-4 py-6">
@@ -48,7 +60,7 @@ function CreateOrder() {
         Ready to order? Let&apos;s go!
       </h2>
 
-      <Form method="POST">
+      <Form method="POST" onSubmit={handleSubmit}>
         <div className="mb-5 flex flex-col gap-2  sm:flex-row sm:items-center">
           <label className="sm:basis-40">First Name</label>
           <div className="grow">
@@ -98,7 +110,9 @@ function CreateOrder() {
         <input type="hidden" name="cart" value={JSON.stringify(cart)} />
 
         <div>
-          <Button disabled={isSubmitting}>Order now</Button>
+          <Button disabled={isSubmitting}>
+            {isSubmitting ? "Placing order..." : "Order now"}
+          </Button>
         </div>
       </Form>
     </div>
@@ -124,6 +138,8 @@ export async function orderAction({ request }) {
   const newOrder = await createOrder(order);
   console.log(newOrder);
 
+  // Don't over use this technique!
+  // store.dispatch(clearCart())
   return redirect(`/order/${newOrder.id}`);
 }
 
