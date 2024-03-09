@@ -67,7 +67,7 @@ function Order() {
     function () {
       if (id) dispatch(clearCart());
     },
-    [dispatch],
+    [dispatch, id],
   );
 
   return (
