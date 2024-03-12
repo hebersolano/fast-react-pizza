@@ -12,6 +12,8 @@ React project from the [Ultimate React Course](https://github.com/jonasschmedtma
 - Tailwind CSS:
   - installation and configuration: "prettier" + "prettier-plugin-tailwindcss", tailwind fold extension
   - tailwind @layer components: reuse styles
+- useFetcher Hook
+- Async Thunk
 
 ## Planning:
 

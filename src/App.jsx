@@ -1,12 +1,17 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+import AppLayout from "./ui/AppLayout";
 import Home from "./ui/Home";
-import Menu, { menuLoader } from "./features/menu/Menu";
 import Cart from "./features/cart/Cart";
+import Menu from "./features/menu/Menu";
 import CreateOrder, { orderAction } from "./features/order/CreateOrder";
 import Order, { orderLoader } from "./features/order/Order";
-import AppLayout from "./ui/AppLayout";
 import Error from "./ui/Error";
 import CreateUser from "./features/users/CreateUser";
+import { UpdateOrderAction } from "./features/order/UpdateOrder";
+import { fetchMenu } from "./features/menu/menuSlice";
 
 const router = createBrowserRouter([
   {
@@ -14,16 +19,28 @@ const router = createBrowserRouter([
     errorElement: <Error />,
     children: [
       { path: "/", element: <Home /> },
-      { path: "/menu", element: <Menu />, loader: menuLoader },
+      { path: "/menu", element: <Menu /> },
       { path: "/cart", element: <Cart /> },
       { path: "/user", element: <CreateUser /> },
       { path: "/order/new", element: <CreateOrder />, action: orderAction },
-      { path: "/order/:orderId", element: <Order />, loader: orderLoader },
+      {
+        path: "/order/:orderId",
+        element: <Order />,
+        loader: orderLoader,
+        action: UpdateOrderAction,
+      },
     ],
   },
 ]);
 
 function App() {
+  const dispatch = useDispatch();
+  const menuLength = useSelector((state) => state.menu.menu.length);
+
+  useEffect(function () {
+    if (!menuLength) dispatch(fetchMenu());
+  }, []); // fetch menu only once
+
   return <RouterProvider router={router} />;
 }
 

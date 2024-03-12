@@ -1,9 +1,10 @@
-import { useLoaderData } from "react-router";
 import { getMenu } from "../../services/apiRestaurant";
 import MenuItem from "./MenuItem";
+import { useSelector } from "react-redux";
 
 function Menu() {
-  const menu = useLoaderData();
+  const menu = useSelector((state) => state.menu.menu);
+  // const menu = useLoaderData();
 
   return (
     <>
@@ -19,6 +20,7 @@ function Menu() {
 
 export async function menuLoader() {
   const menu = await getMenu();
+
   return menu;
 }
 

@@ -8,9 +8,10 @@ import {
 import { getOrder } from "../../services/apiRestaurant";
 import { useLoaderData } from "react-router";
 import OrderItem from "./OrderItem";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../cart/cartSlice";
 import { useEffect } from "react";
+import UpdateOrder from "./UpdateOrder";
 
 /* const order = {
   id: "ABCDEF",
@@ -50,6 +51,7 @@ import { useEffect } from "react";
 function Order() {
   const dispatch = useDispatch();
   const order = useLoaderData();
+  const menu = useSelector((state) => state.menu.menu);
 
   // Everyone can search for all orders, so for privacy reasons we're gonna gonna exclude names or address, these are only for the restaurant staff
   const {
@@ -100,7 +102,13 @@ function Order() {
 
       <ul className="divide-y divide-stone-200 border-b border-t">
         {cart.map((item) => (
-          <OrderItem key={item.pizzaId} item={item} />
+          <OrderItem
+            key={item.pizzaId}
+            item={item}
+            ingredients={
+              menu.find((pizza) => pizza.id === item.pizzaId)?.ingredients || []
+            }
+          />
         ))}
       </ul>
 
@@ -115,6 +123,7 @@ function Order() {
         )}
         <p>To pay on delivery: {formatCurrency(orderPrice + priorityPrice)}</p>
       </div>
+      {!priority && <UpdateOrder />}
     </div>
   );
 }

@@ -46,7 +46,7 @@ const userSlice = createSlice({
   },
   extraReducers: (builder) =>
     builder
-      .addCase(fetchAddress.pending, (state, action) => {
+      .addCase(fetchAddress.pending, (state) => {
         state.status = "loading";
       })
       .addCase(fetchAddress.fulfilled, (state, action) => {
@@ -56,7 +56,8 @@ const userSlice = createSlice({
       })
       .addCase(fetchAddress.rejected, (state, action) => {
         state.status = "error";
-        state.error = action.error.message;
+        state.error =
+          "There was a problem getting your address. Please write it manually";
       }),
 });
 
