@@ -156,7 +156,6 @@ export default CreateOrder;
 export async function orderAction({ request }) {
   const formData = await request.formData();
   const data = Object.fromEntries(formData);
-  console.log(data);
 
   const order = {
     ...data,
@@ -171,7 +170,6 @@ export async function orderAction({ request }) {
   if (Object.keys(errors).length > 0) return errors;
 
   const newOrder = await createOrder(order);
-  console.log(newOrder);
 
   // Don't over use this technique!
   // store.dispatch(clearCart())

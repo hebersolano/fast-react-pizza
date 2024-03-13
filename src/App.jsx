@@ -1,6 +1,6 @@
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import AppLayout from "./ui/AppLayout";
 import Home from "./ui/Home";
@@ -35,11 +35,10 @@ const router = createBrowserRouter([
 
 function App() {
   const dispatch = useDispatch();
-  const menuLength = useSelector((state) => state.menu.menu.length);
 
   useEffect(function () {
-    if (!menuLength) dispatch(fetchMenu());
-  }, []); // fetch menu only once
+    dispatch(fetchMenu());
+  }, []); // fetch menu only the first time the app load
 
   return <RouterProvider router={router} />;
 }

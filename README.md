@@ -8,12 +8,18 @@ React project from the [Ultimate React Course](https://github.com/jonasschmedtma
   - routes structures: `js { path: "/", element: <Home />, errorElement: <Error />, children: [...] }`
   - use of "loader" function with `useLoaderData`.
   - `useNavigation` hook.
-  - "actions" functions and `useActionData` hook to read what the function returns
+  - BrowserRouter "actions" functions to make async operations and perform data mutations. Use with `useActionData`hook to read what the action function returns
+  - Each route can define a "loader" function to provide data to the route element before it renders. Use with `useLoaderData` to read what the loader function returns
+  - useFetcher Hook: use "loaders" and "actions" without changing the URL. Do the same with `<fetcher.Form>` component
 - Tailwind CSS:
   - installation and configuration: "prettier" + "prettier-plugin-tailwindcss", tailwind fold extension
   - tailwind @layer components: reuse styles
-- useFetcher Hook
-- Async Thunk
+  - `twMerge`to overwrite tailwind classes and `clsx` to to conditionally apply a tailwind class
+- Redux:
+  - Create state slices with its reducers and configure redux store
+  - `useDispatch` to dispatch redux actions
+  - `useSelector` to get any state data with selector functions
+  - Async Thunk and extra reducers in the creation of state slices
 
 ## Planning:
 

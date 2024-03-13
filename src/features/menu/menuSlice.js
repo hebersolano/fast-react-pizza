@@ -8,12 +8,6 @@ const initialState = { menu: [], status: "idle", error: "" };
 const menuSlice = createSlice({
   name: "menu",
   initialState,
-  reducers: {
-    saveMenu(state, action) {
-      console.log("saving menu...");
-      state.menu = action.payload;
-    },
-  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchMenu.pending, (state) => {
@@ -28,8 +22,6 @@ const menuSlice = createSlice({
       });
   },
 });
-
-export const { saveMenu } = menuSlice.actions;
 
 const menuReducer = menuSlice.reducer;
 export default menuReducer;

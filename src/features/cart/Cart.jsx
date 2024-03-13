@@ -32,9 +32,8 @@ const fakeCart = [
 function Cart() {
   const cart = useSelector((state) => state.cart.cart);
   const username = useSelector((state) => state.user.username);
+  const menu = useSelector((state) => state.menu.menu);
   const dispatch = useDispatch();
-
-  console.log(cart[0]);
 
   function handleClearCart() {
     dispatch(clearCart());
@@ -48,9 +47,15 @@ function Cart() {
 
       <h2 className="mt-7 text-xl font-semibold ">Your cart, {username}</h2>
 
-      <ul className="mt-3 divide-y divide-stone-200 border-b">
+      <ul className="mb-3 mt-3 divide-y divide-stone-200 border-b">
         {cart.map((item) => (
-          <CartItem key={item.pizzaId} item={item} />
+          <CartItem
+            key={item.pizzaId}
+            item={item}
+            ingredients={
+              menu.find((pizza) => pizza.id === item.pizzaId)?.ingredients || []
+            }
+          />
         ))}
       </ul>
 
